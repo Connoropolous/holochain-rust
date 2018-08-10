@@ -6,11 +6,13 @@ ENV CORE_RUST_VERSION stable
 # Set the internal user for the docker container (non-root)
 ENV DOCKER_BUILD_USER holochain
 
+RUN apt-get update && apt-get install --yes curl
+
 # install Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain ${CORE_RUST_VERSION} -y
 # add cargo to the $PATH
 ENV PATH /home/${DOCKER_BUILD_USER}/.cargo/bin:$PATH
-RUN rustc --version
+RUN cargo --version
 
 RUN cargo install mdbook --vers "^0.1.0"
 
