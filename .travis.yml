@@ -16,5 +16,5 @@ jobs:
       install: . docker/build-mdbook-image
       script: ./travis-update-book.sh
       env:
-        - ENCRYPTION_LABEL: "30dd9296640e"
+        - ENCRYPTION_LABEL: "81289011580b"
         - COMMIT_AUTHOR_EMAIL: "connor.turland@holo.host"
