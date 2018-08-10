@@ -13,6 +13,7 @@ jobs:
         - . docker/run-cov
         - bash <(curl -s https://codecov.io/bash)
     - name: "Mdbook Build"
+      install: . docker/build-mdbook-image
       script: ./travis-update-book.sh
       env:
         - ENCRYPTION_LABEL: "30dd9296640e"

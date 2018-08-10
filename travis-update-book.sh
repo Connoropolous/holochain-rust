@@ -8,7 +8,7 @@ SOURCE_BRANCH="develop"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
-  . docker/build-mdbook-image && . docker/build-mdbook
+  . docker/build-mdbook
 }
 
 # Pull requests and commits to other branches shouldn't build
@@ -33,8 +33,8 @@ cd ../../..
 # Run our compile script
 doCompile
 
-# Move all our built files into the working directory
-cp doc/holochain_101/book/* doc/holochain_101/working
+# Copy all our built files into the working directory
+cp -a doc/holochain_101/book/. doc/holochain_101/working
 
 # Move a copy of our Github Pages config file back into the directory
 cp _config.yml doc/holochain_101/working/_config.yml
