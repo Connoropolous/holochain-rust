@@ -1,5 +1,0 @@
-[book]
-authors = ["David Meister"]
-multilingual = false
-src = "src"
-title = "holochain_101"

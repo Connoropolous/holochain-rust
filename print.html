@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>holochain_101</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="agent.html"><strong aria-hidden="true">1.</strong> Agent</a></li><li><a href="keys.html"><strong aria-hidden="true">2.</strong> Keys</a></li><li><a href="dna.html"><strong aria-hidden="true">3.</strong> DNA</a></li><li><a href="source_chain.html"><strong aria-hidden="true">4.</strong> Source Chain</a></li><li><ol class="section"><li><a href="pairs.html"><strong aria-hidden="true">4.1.</strong> Pairs</a></li></ol></li><li><a href="distributed_hash_table.html"><strong aria-hidden="true">5.</strong> Distributed Hash Table</a></li><li><a href="lifecycle_of_an_entry.html"><strong aria-hidden="true">6.</strong> Lifecycle of an Entry</a></li><li><a href="links.html"><strong aria-hidden="true">7.</strong> Links Entries</a></li><li><a href="core_api.html"><strong aria-hidden="true">8.</strong> Core API</a></li><li><a href="wasm.html"><strong aria-hidden="true">9.</strong> WASM</a></li><li><a href="building_apps.html"><strong aria-hidden="true">10.</strong> Building Apps</a></li><li><ol class="section"><li><a href="zome/api_functions.html"><strong aria-hidden="true">10.1.</strong> using zome API functions</a></li><li><a href="zome/implementation.html"><strong aria-hidden="true">10.2.</strong> implementing zome API function</a></li></ol></li><li><a href="command_line_tools.html"><strong aria-hidden="true">11.</strong> Command Line Tools</a></li><li><a href="holochain_across_platforms.html"><strong aria-hidden="true">12.</strong> Holochain Across Platforms</a></li><li><a href="state_actions.html"><strong aria-hidden="true">13.</strong> Redux Architecture</a></li><li><ol class="section"><li><a href="state/actions.html"><strong aria-hidden="true">13.1.</strong> State actions</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">holochain_101</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="print.html#agent" id="agent"><h1>Agent</h1></a>
+<a class="header" href="print.html#keys" id="keys"><h1>Keys</h1></a>
+<a class="header" href="print.html#dna" id="dna"><h1>DNA</h1></a>
+<a class="header" href="print.html#source-chain" id="source-chain"><h1>Source Chain</h1></a>
+<a class="header" href="print.html#pairs" id="pairs"><h1>Pairs</h1></a>
+<p>Pair has</p>
+<p>Entry has
+entry_type
+content</p>
+<p>The hash of a Header is the result of combining all of its properties and then getting the hash of that string.</p>
+<p>Header has
+entry_type
+time
+next // link to the immediately preceding header, None is valid only for genesis
+entry
+type_next // link to the most recent header of the same type, None is valid only for the first of type
+signature // agents crptographic signature</p>
+<a class="header" href="print.html#distributed-hash-table" id="distributed-hash-table"><h1>Distributed Hash Table</h1></a>
+<a class="header" href="print.html#lifecycle-of-an-entry" id="lifecycle-of-an-entry"><h1>Lifecycle of an Entry</h1></a>
+<a class="header" href="print.html#links-entries" id="links-entries"><h1>Links Entries</h1></a>
+<a class="header" href="print.html#core-api" id="core-api"><h1>Core API</h1></a>
+<a class="header" href="print.html#wasm" id="wasm"><h1>WASM</h1></a>
+<a class="header" href="print.html#building-apps" id="building-apps"><h1>Building Apps</h1></a>
+<a class="header" href="print.html#zome-api-functions" id="zome-api-functions"><h1>Zome API functions</h1></a>
+<a class="header" href="print.html#overview" id="overview"><h2>Overview</h2></a>
+<p>A zome API function is any Holochain core functionality that is exposed as a
+callable function within zome code.</p>
+<p>Compare this to a zome function, which is a function implemented in the zome
+language and called by Holochain.</p>
+<p>So, zome functions are called by Holochain, which execute logic in the zome
+language and can optionally call zome API functions, which finally return a
+value back to Holochain.</p>
+<pre><code>Holochain blocks
+  -&gt; calls zome function
+  -&gt; executes WASM logic compiled from zome language
+  -&gt; zome logic calls zome API function
+    -&gt; Holochain natively executes zome API function
+    -&gt; Holochain returns value to zome function
+  -&gt; zome function returns some value
+  -&gt; Holochain receives final value of zome function
+</code></pre>
+<p>Each zome API function has a canonical name used internally by Holochain.</p>
+<p>Zome code can be written in any language that compiles to WASM. This means the
+canonical function name and the function name in the zome language might be
+different. The zome language will closely mirror the canonical names, but naming
+conventions such as capitalisation of the zome language are also respected.</p>
+<p>For example, the canonical <code>verify_signature</code> might become <code>verifySignature</code> in
+JavaScript.</p>
+<p>When a zome API function is called from within zome code a corresponding Rust
+function is called. The Rust function is passed the current zome runtime and the
+arguments that the zome API function was called with. The Rust function connects
+zome logic to Holochain core functionality and often has side effects. The
+return value of the Rust function is passed back to the zome code as the return
+of the zome API function.</p>
+<a class="header" href="print.html#reference" id="reference"><h2>Reference</h2></a>
+<a class="header" href="print.html#debug" id="debug"><h3>Debug</h3></a>
+<p>Canonical name: <code>debug</code></p>
+<p>Debug sends the passed arguments to current log that was given to the instance and returns <code>None</code>.</p>
+<a class="header" href="print.html#commit" id="commit"><h3>Commit</h3></a>
+<p>Canonical name: <code>commit</code></p>
+<p>Given an entry type and content, commits to the local source chain and returns
+the entry hash if successful. The hash is the hash of the entry associated with
+this commit in the source chain.</p>
+<a class="header" href="print.html#get" id="get"><h3>Get</h3></a>
+<p>Canonical name: <code>get</code></p>
+<p>Given an entry hash, gets some pair from the DHT if that entry content exists.</p>
+<p>Performs lookups from (in order):</p>
+<ul>
+<li>The local source chain</li>
+<li>The local hash table</li>
+<li>The distributed hash table</li>
+</ul>
+<p>Note that multiple pairs can have the same entry hash, both locally and on the
+DHT across the network.</p>
+<p>Note also that two entries with the same content but different types resolve to
+the same entry hash. The entry hash is <em>only</em> unique to the entry content.</p>
+<p>Use the header hash to lookup a specific pair.</p>
+<a class="header" href="print.html#zome-implementation" id="zome-implementation"><h1>Zome implementation</h1></a>
+<a class="header" href="print.html#zome-api-functions-1" id="zome-api-functions-1"><h2>Zome API functions</h2></a>
+<p>Each zome API function is implemented under <code>nucleus::ribosome</code>.</p>
+<p>There is a fair bit of boilerplate at the moment, sorry!</p>
+<p>To co-ordinate the execution of an API function across Rust and WASM we need to
+implement several items:</p>
+<ul>
+<li>An integer index in the <code>nucleus::ribosome::HcApiFuncIndex</code> enum</li>
+<li>Map the index to the canonical name for the API function under <code>nucleus::ribosome::index_canonical_name</code></li>
+<li>An invocation dispatch in <code>nucleus::ribosome::call</code> under <code>Externals for Runtime</code></li>
+<li>A ribosome module implementing the invocation logic as <code>invoke_*</code></li>
+<li>An action if the zome API function has side effects</li>
+</ul>
+<a class="header" href="print.html#zome-api-function-index" id="zome-api-function-index"><h3>Zome API function index</h3></a>
+<p>Simply add the name of the new zome API function to the end of the enum.</p>
+<p>DO add a doc comment summarising what the zome function does and sketching the
+function signature.</p>
+<p>Do NOT add to the start or middle of the enum as that will renumber the other
+zome functions.</p>
+<a class="header" href="print.html#map-the-canonical-name-index" id="map-the-canonical-name-index"><h3>Map the canonical name index</h3></a>
+<p>Add a mapping from the canonical name to the enum variant in <code>nucleus::ribosome::index_canonical_name</code>.</p>
+<p><code>nucleus::ribosome::call</code> will automatically resolve the correct function name
+once the enum mapping is set.</p>
+<a class="header" href="print.html#invocation-dispatch" id="invocation-dispatch"><h3>Invocation dispatch</h3></a>
+<p>Add the match arm for the new enum under <code>invoke_index</code>.</p>
+<p>It should look something like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+index if index == HcApiFuncIndex::Foo as usize =&gt; invoke_foo(self, &amp;args),
+#}</code></pre></pre>
+<p>Where <code>Foo</code> and <code>invoke_foo</code> should replace foo with the canonical name.</p>
+<a class="header" href="print.html#zome-api-function-ribosome-module" id="zome-api-function-ribosome-module"><h3>Zome API function ribosome module</h3></a>
+<p>Each zome API function should have its own module under <code>nucleus::ribosome::*</code>.</p>
+<p>Implement a public function as <code>invoke_&lt;canonical name&gt;</code>. The function must take
+two arguments, a <code>&amp;mut nucleus::ribosome::Runtime</code> and a <code>&amp;wasmi::RuntimeArgs</code>.</p>
+<p>This function will be called by the invocation dispatch (see above).</p>
+<a class="header" href="print.html#zome-api-function-arguments" id="zome-api-function-arguments"><h4>Zome API function arguments</h4></a>
+<p>The <code>wasmi::RuntimeArgs</code> passed to the Zome API function contains only a single
+<code>u32</code> value. This is an encoded representation of a single page of memory
+supported by the memory manager. The 16 high bits are the memory offset and the
+16 low bits are the memory length. See the <code>wasm_utils</code> crate for more
+implementation details.</p>
+<p>You don't have to work with the memory manager directly, simply pass the runtime
+and runtime args to <code>nucleus::runtime_args_to_utf8</code> to get a utf-8 string from
+memory.</p>
+<p>You DO have to handle serialization round trips if you want to pass anything
+other than a single utf-8 string to a zome API function.</p>
+<p>The simplest way to do this is implement a struct that derives <code>Serialize</code> and
+<code>Deserialize</code> from serde, then use serde and <code>.into_bytes()</code> co-ordinate the
+round trip.</p>
+<p>For an example implementation of a struct with several fields see:</p>
+<ul>
+<li><code>nucleus::ribosome::commit::CommitArgs</code> for the input args struct</li>
+<li><code>nucleus::ribosome::commit::tests::test_args_bytes</code> serializing the struct as bytes</li>
+<li><code>nucleus::ribosome::commit::invoke_commit</code> deserializing the struct from the runtime</li>
+</ul>
+<a class="header" href="print.html#zome-api-function-action-dispatch" id="zome-api-function-action-dispatch"><h4>Zome API function action dispatch</h4></a>
+<p>If the function has a side effect it must send an action to the state reduction
+layer.</p>
+<p>Actions are covered in more detail in the state chapter.</p>
+<p>In summary, if you want to send an action and wait for a return value:</p>
+<ul>
+<li>create an outer channel in the scope of your invoke function that will receive the return value</li>
+<li>call <code>::instance::dispatch_action_with_observer</code> with:
+<ul>
+<li>the runtime's channels</li>
+<li>the action the reducer will dispatch on</li>
+<li>an observer sensor, which is a closure that polls for the action result and sends to your outer channel</li>
+</ul>
+</li>
+<li>block the outer channel until you receive the action result</li>
+</ul>
+<a class="header" href="print.html#zome-api-function-return-values" id="zome-api-function-return-values"><h4>Zome API function return values</h4></a>
+<p>The zome API function returns a value to wasm representing success or a wasm trap.</p>
+<p>The success value can only be a single <code>i32</code>.</p>
+<p>Traps are a low level wasm concern and are unlikely to be directly useful to a
+zome API function implementation.</p>
+<p>See https://github.com/WebAssembly/design/blob/master/Semantics.md#traps</p>
+<p>To get complex values out of wasm we use the memory manager, much like the input
+argument serialization (see above).</p>
+<p>The util function <code>nucleus::runtime_allocate_encode_str</code> takes a string,
+allocates memory and returns the value that the zome API function must return.</p>
+<p>To return an error relevant to holochain, return <code>Ok</code> with an <code>HcApiReturnCode</code>
+error enum variant.</p>
+<p>For an example implementation returning a complex struct see:</p>
+<ul>
+<li><code>agent::state::ActionResult::Get</code> defining a result containing a <code>Pair</code> struct</li>
+<li><code>nucleus::ribosome::get::invoke_get</code>
+<ul>
+<li>match the action result against the correct enum variant</li>
+<li>serialize the pair using serde</li>
+<li>return the result of <code>runtime_allocate_encode_str</code></li>
+<li>if the action result variant does NOT match then return <code>HcApiReturnCode::ErrorActionResult</code></li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#zome-api-function-agent-action" id="zome-api-function-agent-action"><h3>Zome API function agent action</h3></a>
+<p>If the zome API function will cause side effects to the agent state then it must
+implement and dispatch an action.</p>
+<p>Actions are covered in more detail in the state chapter.</p>
+<p>In summary, if a new agent action (for example) is needed:</p>
+<ul>
+<li>extend the <code>agent::state::Action</code> enum
+<ul>
+<li>use the canonical name if that makes sense</li>
+<li>implement a constructor method in the enum impl</li>
+<li>include a snowflake ID or there will be key collisions in the state history</li>
+</ul>
+</li>
+<li>extend the <code>agent::state::ActionResult</code> enum if the action has a return value</li>
+<li>implement a function dispatch off the new action in <code>agent::state::reduce</code></li>
+<li>implement the dispatched <code>agent::state::do_action_*</code> function</li>
+</ul>
+<a class="header" href="print.html#command-line-tools" id="command-line-tools"><h1>Command Line Tools</h1></a>
+<a class="header" href="print.html#holochain-across-platforms" id="holochain-across-platforms"><h1>Holochain Across Platforms</h1></a>
+<a class="header" href="print.html#building-for-android" id="building-for-android"><h3>Building for Android</h3></a>
+<p>Note: These instructions for building Holochain on Android are adapted from <a href="https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html">here</a>.</p>
+<p>In order to get to libraries that can be linked against when building <a href="https://github.com/holochain/holosqape">HoloSqape</a> for Android, you basically just need to setup up according targets for cargo.</p>
+<p>Given that the Android SDK is installed, here are the steps to setting things up for building:</p>
+<ol>
+<li>
+<p>Install the Android tools:</p>
+<p>a. Install <a href="https://developer.android.com/studio/">Android Studio</a>
+b. Open Android Studio and navigate to SDK Tools:
+- MacOS: <code>Android Studio &gt; Preferences &gt; Appearance &amp; Behaviour &gt; Android SDK &gt; SDK Tools</code>
+- Linux: <code>Configure (gear) &gt; Appearance &amp; Behavior &gt; System Settings &gt; Android SDK</code>
+c. Check the following options for installation and click OK:
+* Android SDK Tools
+* NDK
+* CMake
+* LLDB
+d. Get a beverage of your choice (or a full meal for that matter) why you wait for the lengthy download</p>
+</li>
+<li>
+<p>Setup ANDROID_HOME env variable:</p>
+</li>
+</ol>
+<p>On MacOS</p>
+<pre><code class="language-bash">export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+</code></pre>
+<p>Linux: (assuming you used defaults when installing Android Studio)</p>
+<pre><code class="language-bash">export ANDROID_HOME=$HOME/Android/Sdk
+</code></pre>
+<ol start="2">
+<li>Create standalone NDKs (the commands below put the NDK in your home dir but you can put them where you like):</li>
+</ol>
+<pre><code class="language-bash">export NDK_HOME=$ANDROID_HOME/ndk-bundle
+cd ~
+mkdir NDK
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch arm64 --install-dir NDK/arm64
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch arm --install-dir NDK/arm
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch x86 --install-dir NDK/x86
+</code></pre>
+<ol start="3">
+<li>Add the following lines to your <code>~/.cargo/config</code>:</li>
+</ol>
+<pre><code class="language-toml">[target.aarch64-linux-android]
+ar = &quot;&lt;your $HOME value here&gt;/NDK/arm64/bin/aarch64-linux-android-ar&quot;
+linker = &quot;&lt;your $HOME value here&gt;/NDK/arm64/bin/aarch64-linux-android-clang&quot;
+
+[target.armv7-linux-androideabi]
+ar = &quot;&lt;your $HOME value here&gt;/NDK/arm/bin/arm-linux-androideabi-ar&quot;
+linker = &quot;&lt;your $HOME value here&gt;/NDK/arm/bin/arm-linux-androideabi-clang&quot;
+
+[target.i686-linux-android]
+ar = &quot;&lt;your $HOME value here&gt;/NDK/x86/bin/i686-linux-android-ar&quot;
+linker = &quot;&lt;your $HOME value here&gt;/NDK/x86/bin/i686-linux-android-clang&quot;
+
+</code></pre>
+<p>(this toml file needs absolute paths, so you need to prefix the path with your home dir).</p>
+<ol start="4">
+<li>Now you can add those targets to your rust installation with:</li>
+</ol>
+<pre><code>rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android
+</code></pre>
+<p>Finally, should now be able to build Holochain for Android with your chosen target, e.g.:</p>
+<pre><code>cd &lt;holochain repo&gt;
+cargo build --target armv7-linux-androideabi --release
+</code></pre>
+<p><strong>NOTE:</strong>  there is currently a problem in that <code>wabt</code> (which we use in testing as a dev dependency) won't compile on android, and the cargo builder compiles dev dependencies even though they aren't being used in release builds.  Thus as a work around, for the cargo build command above to work, you need to manually comment out the dev dependency section in both <code>core/Cargo.toml</code> and <code>core_api/Cargo.toml</code></p>
+<a class="header" href="print.html#state--actions" id="state--actions"><h1>State &amp; Actions</h1></a>
+<p>instance::Instance has a state::State which is the one global state with
+sub-state slices for each module which are defined in each module respectively
+(see src/agent/mod.rs, src/network/mod.rs and src/nucleus/mod.rs) and put
+together in src/state.rs.</p>
+<p>State is only read from the instance</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+instance.state().nucleus().dna()
+#}</code></pre></pre>
+<p>and mutated by dispatching an action:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let entry = Entry{...};
+instance.dispatch(state::Action::Agent(Commit(entry)));
+#}</code></pre></pre>
+<p>Instance calls reduce on the state with the next action to consume:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn consume_next_action(&amp;mut self) {
+    if self.pending_actions.len() &gt; 0 {
+        let action = self.pending_actions.pop_front().unwrap();
+        self.state = self.state.clone().reduce(&amp;action);
+    }
+}
+#}</code></pre></pre>
+<p>The main reducer creates a new State object and calls the sub-reducers:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn reduce(&amp;mut self, action: &amp;Action) -&gt; Self {
+    State {
+        nucleus: ::nucleus::reduce(Rc::clone(&amp;self.nucleus), action),
+        agent: ::agent::reduce(Rc::clone(&amp;self.agent), action)
+
+    }
+}
+#}</code></pre></pre>
+<p>The module 'state' defines an action type (enum state::Action) that has values for
+each sub-module. The modules define their sub-actions themselves and provide
+their own sub-reducer function that handles those action types.</p>
+<p>Since sub-module state slices are included in state::State as counted references (Rc&lt;AgentState&gt;) the sub-module reducers can choose if they have the new state object (that the reducer returns) reference the same old sub-state slice (when the action did not affect the sub-state for instance) or if they clone the state, mutate it and return a different reference.</p>
+<p>In module agent:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn reduce(old_state: Rc&lt;AgentState&gt;, action: &amp;_Action) -&gt; Rc&lt;AgentState&gt; {
+    match *action {
+        _Action::Agent(ref agent_action) =&gt; {
+            let mut new_state: AgentState = (*old_state).clone();
+            match *agent_action {
+                Action::Commit(ref entry) =&gt; {
+
+                }
+            }
+            Rc::new(new_state)
+        },
+        _ =&gt; old_state
+    }
+}
+#}</code></pre></pre>
+<p>With every module handling its state which is read-only for everything else and providing actions to be created from anywhere else that are processed through the reducer hierarchy I hope to decouple modules effectively. Actions being logged make already for a great debugging tool, if that is not enough, the state history could be stored and in a future debugging tool even switched back and forth (time-machine debugging for Holochain :D).</p>
+<p>Redux in Rust code was used as a reference from <a href="https://github.com/rust-redux/rust-redux">this repository</a>.</p>
+<p>@TODO
+@see https://github.com/holochain/holochain-rust/issues/176</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
