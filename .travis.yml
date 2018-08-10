@@ -13,7 +13,9 @@ jobs:
         - . docker/run-cov
         - bash <(curl -s https://codecov.io/bash)
     - name: "Mdbook Build"
-      install: . docker/build-mdbook-image
+      language: rust
+      cache: cargo
+      install: cargo install mdbook --vers "^0.1.0"
       script: ./travis-update-book.sh
       env:
         - ENCRYPTION_LABEL: "81289011580b"
