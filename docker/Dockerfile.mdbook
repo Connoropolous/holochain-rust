@@ -1,6 +1,14 @@
-FROM holochain/holochain-rust:develop
+FROM ubuntu
 
-RUN rustup default stable
+# Use the stable Rust version
+ENV CORE_RUST_VERSION stable
+
+# install Rust
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain ${CORE_RUST_VERSION} -y
+# add cargo to the $PATH
+ENV PATH /home/${DOCKER_BUILD_USER}/.cargo/bin:$PATH
+RUN rustc --version
+
 RUN cargo install mdbook --vers "^0.1.0"
 
 WORKDIR /holochain/doc/holochain_101
