@@ -34,10 +34,7 @@ cd ../../..
 doCompile
 
 # Move all our built files into the working directory
-cd doc/holochain_101
-ls -la
-mv book/* working
-cd ../..
+cp doc/holochain_101/book/* doc/holochain_101/working
 
 # Move a copy of our Github Pages config file back into the directory
 cp _config.yml doc/holochain_101/working/_config.yml
