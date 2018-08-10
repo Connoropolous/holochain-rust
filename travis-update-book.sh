@@ -31,16 +31,13 @@ git ls-files | xargs rm -rf
 cd ../../..
 
 # Run our compile script
-# doCompile
+doCompile
 
 # Move all our built files into the working directory
-mkdir doc/holochain_101/book
-touch doc/holochain_101/book/index.html
 cd doc/holochain_101
 ls -la
 mv book/* working
 cd ../..
-exit 0
 
 # Move a copy of our Github Pages config file back into the directory
 cp _config.yml doc/holochain_101/working/_config.yml
