@@ -15,7 +15,7 @@ jobs:
     - name: "Mdbook Build"
       language: rust
       cache: cargo
-      install: cargo install mdbook --vers "^0.1.0"
+      install: cargo install mdbook --vers "^0.1.0" || echo "Mdbook already installed"
       script: ./travis-update-book.sh
       env:
         - ENCRYPTION_LABEL: "81289011580b"
