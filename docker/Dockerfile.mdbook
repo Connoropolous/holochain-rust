@@ -24,6 +24,8 @@ RUN cargo install mdbook --vers "^0.1.0"
 
 WORKDIR /holochain/doc/holochain_101
 
+USER root
+
 # Port for web access
 EXPOSE 3000
 # Port for websocket (live reload)
