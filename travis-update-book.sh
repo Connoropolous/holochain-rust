@@ -36,7 +36,10 @@ cd ../../..
 # Move all our built files into the working directory
 mkdir doc/holochain_101/book
 touch doc/holochain_101/book/index.html
-mv doc/holochain_101/book/* doc/holochain_101/working
+cd doc/holochain_101
+ls -la
+mv book/* working
+cd ../..
 exit 0
 
 # Move a copy of our Github Pages config file back into the directory
