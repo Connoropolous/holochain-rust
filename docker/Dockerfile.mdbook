@@ -6,7 +6,11 @@ ENV CORE_RUST_VERSION stable
 # Set the internal user for the docker container (non-root)
 ENV DOCKER_BUILD_USER holochain
 
+# install curl
 RUN apt-get update && apt-get install --yes curl
+
+RUN useradd -ms /bin/bash ${DOCKER_BUILD_USER}
+USER ${DOCKER_BUILD_USER}
 
 # install Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain ${CORE_RUST_VERSION} -y
