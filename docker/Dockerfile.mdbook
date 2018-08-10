@@ -6,8 +6,10 @@ ENV CORE_RUST_VERSION stable
 # Set the internal user for the docker container (non-root)
 ENV DOCKER_BUILD_USER holochain
 
-# install curl
-RUN apt-get update && apt-get install --yes curl
+# install curl and cmake
+RUN apt-get update && apt-get install --yes\
+  curl \
+  cmake
 
 RUN useradd -ms /bin/bash ${DOCKER_BUILD_USER}
 USER ${DOCKER_BUILD_USER}
